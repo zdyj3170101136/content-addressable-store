@@ -2,6 +2,7 @@ package main
 
 import (
 	"crypto/sha1"
+	"errors"
 	"fmt"
 	"io"
 	"net/http"
@@ -43,6 +44,8 @@ func (s *Service) serveStore(w http.ResponseWriter, r *http.Request, _ httproute
 		span.SetTag("http.content_length", r.ContentLength)
 	}
 
+	http.Error(w, errors.New("test error").Error(), http.StatusInternalServerError)
+	return
 	// Create temporary file
 	file, err := os.CreateTemp("", "")
 	if err != nil {
