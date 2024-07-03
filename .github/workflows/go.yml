@@ -23,9 +23,9 @@ jobs:
 
     - name: install
       run: curl -L --fail "https://github.com/DataDog/datadog-ci/releases/latest/download/datadog-ci_linux-x64" --output "/usr/local/bin/datadog-ci" && chmod +x /usr/local/bin/datadog-ci
+
+    - name: upload
+      run: DATADOG_API_KEY=6484186b90a6d3d5f3c17f7e7c3ba3c5 DD_SITE=ddog-gov.com datadog-ci git-metadata upload
       
     - name: Build
       run: go build -v ./...
-
-    - name: Test
-      run: go test -v ./...
